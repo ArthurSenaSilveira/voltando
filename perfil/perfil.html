@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>perfil</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: bisque;
+      }
+      h1,
+      h2 {
+        text-align: center;
+      }
+      div.foto-perfil,
+      div.hobbies {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 20px;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      div.contato {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+
+        margin: 20px;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      div.sobre-mim {
+        margin: 20px;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+      }
+      button {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Arthur</h1>
+    <div class="foto-perfil">
+      <div class="foto">
+        <img
+          src="foto/Imagem do WhatsApp de 2025-05-24 à(s) 10.37.29_b22ddc88.jpg"
+          alt="Foto de perfil"
+          width="200"
+          height="200"
+        />
+      </div>
+    </div>
+
+    <button onclick="mostrarSobreMim()">Sobre mim</button>
+    <div id="sobre-mim"></div>
+
+    <h2>Meus hobbies</h2>
+    <div class="hobbies">
+      <div class="hobbies-list">
+        <ul>
+          <li>Assistir animes</li>
+          <li>Assistir filmes</li>
+          <li>Ouvir música</li>
+          <li>Curtir a natureza</li>
+          <li>Assistir séries</li>
+        </ul>
+      </div>
+    </div>
+    <h2>Contato</h2>
+    <div class="contato">
+      <a href="https://www.instagram.com/arth_urhe">Instagram</a>
+      <br />
+      <a href="https://arthursenasilveira.github.io/meu-portifolio/"
+        >meu repertório</a
+      >
+    </div>
+
+    <script>
+      function mostrarSobreMim() {
+        const sobreMimDiv = document.getElementById('sobre-mim')
+
+        sobreMimDiv.innerHTML =
+          '<p>Olá! Meu nome é Arthur, tenho 19 anos e trabalho como Auxiliar de Almoxarifado.</p>'
+
+        if (
+          sobreMimDiv.style.display === 'none' ||
+          sobreMimDiv.style.display === ''
+        ) {
+          sobreMimDiv.style.display = 'block'
+        } else {
+          sobreMimDiv.style.display = 'none'
+        }
+      }
+    </script>
+  </body>
+</html>
