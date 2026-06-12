@@ -84,8 +84,15 @@
                 const listaTarefas = document.querySelector('.minhaLista');
                 const novaTarefa = document.createElement('ul');
                 const itemTarefa = document.createElement('li');
+                itemTarefa.ATTRIBUTE_NODE = document.createElement('button');
+                btnRemover.textContent = 'Remover';
                 itemTarefa.textContent = tarefa;
                 novaTarefa.appendChild(itemTarefa);
+                itemTarefa.appendChild(btnRemover);
+
+                btnRemover.addEventListener('click', () => {
+                    listaTarefas.removeChild(novaTarefa);
+                });
                 listaTarefas.appendChild(novaTarefa);
                 tarefaInput.value = '';
             }
