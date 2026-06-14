@@ -35,7 +35,7 @@
         border: 1px solid #ccc;
       }
 
-      input[type="text"] {
+      input[type='text'] {
         display: block;
         margin: 0 auto 10px auto;
         padding: 10px;
@@ -57,6 +57,24 @@
         border-radius: 5px;
         cursor: pointer;
       }
+      .concluida {
+        text-decoration: line-through;
+        color: gray;
+      }
+      li {
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
     </style>
   </head>
   <body>
@@ -73,30 +91,52 @@
     </div>
     <h2>Minha Lista de Tarefas</h2>
     <div class="minhaLista">
-        <input type="text" id="tarefaInput" placeholder="Digite uma tarefa">
-        <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
+      <input type="text" id="tarefaInput" placeholder="Digite uma tarefa" />
+      <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
+      <p>Tarefas:</p>
+      <p class="quantTarefas"></p>
+      <ul id="listaTarefas"></ul>
     </div>
     <script>
-        function adicionarTarefa(){
-            const tarefaInput = document.getElementById('tarefaInput');
-            const tarefa = tarefaInput.value.trim();
-            if(tarefa !== ''){
-                const listaTarefas = document.querySelector('.minhaLista');
-                const novaTarefa = document.createElement('ul');
-                const itemTarefa = document.createElement('li');
-                itemTarefa.ATTRIBUTE_NODE = document.createElement('button');
-                btnRemover.textContent = 'Remover';
-                itemTarefa.textContent = tarefa;
-                novaTarefa.appendChild(itemTarefa);
-                itemTarefa.appendChild(btnRemover);
-
-                btnRemover.addEventListener('click', () => {
-                    listaTarefas.removeChild(novaTarefa);
-                });
-                listaTarefas.appendChild(novaTarefa);
-                tarefaInput.value = '';
-            }
+      function adicionarTarefa() {
+        function atualizarContador() {
+          let contador = document.querySelectorAll('#listaTarefas li').length
+        quantTarefas.textContent = `${contador}`
+          // conta os li
+          // atualiza o texto
         }
+        let quantTarefas = document.querySelector('.quantTarefas')
+        const tarefaInput = document.getElementById('tarefaInput')
+        const tarefa = tarefaInput.value.trim()
+        if (tarefa !== '') {
+          const listaTarefas = document.getElementById('listaTarefas')
+          const novaTarefa = document.createElement('li')
+          const btnRemover = document.createElement('button')
+
+          btnRemover.textContent = 'Remover'
+          const itemTarefa = document.createElement('span')
+          itemTarefa.textContent = tarefa
+          novaTarefa.appendChild(itemTarefa)
+          novaTarefa.appendChild(btnRemover)
+          novaTarefa.addEventListener('click', () => {
+            itemTarefa.classList.toggle('concluida')
+          })
+
+          btnRemover.addEventListener('click', () => {
+            listaTarefas.removeChild(novaTarefa)
+              atualizarContador()
+          })
+          listaTarefas.appendChild(novaTarefa)
+          tarefaInput.value = ''
+        } else {
+          if (tarefa === '${tarefa}'){
+            alert('Tarefa já existe na lista.')
+          }
+          alert('Por favor, digite uma tarefa válida.')
+        }
+          atualizarContador()
+        
+      }
     </script>
   </body>
 </html>
