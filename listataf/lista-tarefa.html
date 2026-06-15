@@ -93,6 +93,9 @@
     <div class="minhaLista">
       <input type="text" id="tarefaInput" placeholder="Digite uma tarefa" />
       <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
+      <button onclick="concluida()">Tarefas Concluídas</button>
+      <button onclick="pendentes()">Tarefas Pendentes</button>
+      <button onclick="mostrarTodas()">Mostrar Todas</button>
       <p>Tarefas:</p>
       <p class="quantTarefas"></p>
       <ul id="listaTarefas"></ul>
@@ -105,6 +108,7 @@
           // conta os li
           // atualiza o texto
         }
+        
         let quantTarefas = document.querySelector('.quantTarefas')
         const tarefaInput = document.getElementById('tarefaInput')
         const tarefa = tarefaInput.value.trim()
@@ -119,24 +123,61 @@
           novaTarefa.appendChild(itemTarefa)
           novaTarefa.appendChild(btnRemover)
           novaTarefa.addEventListener('click', () => {
-            itemTarefa.classList.toggle('concluida')
+            novaTarefa.classList.toggle('concluida')
           })
 
           btnRemover.addEventListener('click', () => {
             listaTarefas.removeChild(novaTarefa)
               atualizarContador()
           })
+          let tarefaExistente = false
+          for (const item of listaTarefas.children) {
+            
+            const tarefaItem = item.querySelector('span').textContent
+
+            if (tarefaItem === tarefa) {
+              tarefaExistente = true
+              break
+            }}
+          if (tarefaExistente) {
+            alert('Essa tarefa já existe na lista.')
+          } else {
           listaTarefas.appendChild(novaTarefa)
-          tarefaInput.value = ''
-        } else {
-          if (tarefa === '${tarefa}'){
-            alert('Tarefa já existe na lista.')
-          }
-          alert('Por favor, digite uma tarefa válida.')
+          
         }
-          atualizarContador()
         
-      }
+        tarefaInput.value = ''
+        
+        atualizarContador()
+
+        
+        }}
+        function concluida() {
+          const tarefas = document.querySelectorAll('#listaTarefas li')
+          tarefas.forEach(tarefa => {
+            if (tarefa.classList.toggle('concluida')) {
+              tarefa.style.display = 'block'
+            } else {
+              tarefa.style.display = 'none'
+            }
+          })
+        }
+        function pendentes() {
+          const tarefas = document.querySelectorAll('#listaTarefas li')
+          tarefas.forEach(tarefa => {
+            if (!tarefa.classList.contains('concluida')) {
+              tarefa.style.display = 'block'
+            } else {
+              tarefa.style.display = 'none'
+            }
+          })
+        }
+        function mostrarTodas() {
+          const tarefas = document.querySelectorAll('#listaTarefas li')
+          tarefas.forEach(tarefa => {
+            tarefa.style.display = 'block'
+          })
+        }
     </script>
   </body>
 </html>
