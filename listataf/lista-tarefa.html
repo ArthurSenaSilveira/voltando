@@ -101,14 +101,31 @@
       <ul id="listaTarefas"></ul>
     </div>
     <script>
+      let tarefas = []
+
+      function renderizarTarefas() {
+        let listaTarefas = document.getElementById('listaTarefas')
+        listaTarefas.innerHTML = ''
+        tarefas.forEach(tarefa => {
+          const novaTarefa = document.createElement('li')
+          const btnRemover = document.createElement('button')
+          btnRemover.textContent = 'Remover'
+          const itemTarefa = document.createElement('span')
+          itemTarefa.textContent = tarefa
+          novaTarefa.appendChild(itemTarefa)
+          novaTarefa.appendChild(btnRemover)
+          listaTarefas.appendChild(novaTarefa)
+        })
+      }
+
       function adicionarTarefa() {
         function atualizarContador() {
           let contador = document.querySelectorAll('#listaTarefas li').length
-        quantTarefas.textContent = `${contador}`
+          quantTarefas.textContent = `${contador}`
           // conta os li
           // atualiza o texto
         }
-        
+
         let quantTarefas = document.querySelector('.quantTarefas')
         const tarefaInput = document.getElementById('tarefaInput')
         const tarefa = tarefaInput.value.trim()
@@ -128,56 +145,55 @@
 
           btnRemover.addEventListener('click', () => {
             listaTarefas.removeChild(novaTarefa)
-              atualizarContador()
+            atualizarContador()
           })
           let tarefaExistente = false
           for (const item of listaTarefas.children) {
-            
             const tarefaItem = item.querySelector('span').textContent
 
             if (tarefaItem === tarefa) {
               tarefaExistente = true
               break
-            }}
+            }
+          }
           if (tarefaExistente) {
             alert('Essa tarefa já existe na lista.')
           } else {
-          listaTarefas.appendChild(novaTarefa)
-          
-        }
-        
-        tarefaInput.value = ''
-        
-        atualizarContador()
+            listaTarefas.appendChild(novaTarefa)
+          }
+          tarefas.push(tarefa)
 
-        
-        }}
-        function concluida() {
-          const tarefas = document.querySelectorAll('#listaTarefas li')
-          tarefas.forEach(tarefa => {
-            if (tarefa.classList.toggle('concluida')) {
-              tarefa.style.display = 'block'
-            } else {
-              tarefa.style.display = 'none'
-            }
-          })
+          tarefaInput.value = ''
+
+          atualizarContador()
         }
-        function pendentes() {
-          const tarefas = document.querySelectorAll('#listaTarefas li')
-          tarefas.forEach(tarefa => {
-            if (!tarefa.classList.contains('concluida')) {
-              tarefa.style.display = 'block'
-            } else {
-              tarefa.style.display = 'none'
-            }
-          })
-        }
-        function mostrarTodas() {
-          const tarefas = document.querySelectorAll('#listaTarefas li')
-          tarefas.forEach(tarefa => {
+      }
+      function concluida() {
+        const tarefas = document.querySelectorAll('#listaTarefas li')
+        tarefas.forEach(tarefa => {
+          if (tarefa.classList.toggle('concluida')) {
             tarefa.style.display = 'block'
-          })
-        }
+          } else {
+            tarefa.style.display = 'none'
+          }
+        })
+      }
+      function pendentes() {
+        const tarefas = document.querySelectorAll('#listaTarefas li')
+        tarefas.forEach(tarefa => {
+          if (!tarefa.classList.contains('concluida')) {
+            tarefa.style.display = 'block'
+          } else {
+            tarefa.style.display = 'none'
+          }
+        })
+      }
+      function mostrarTodas() {
+        const tarefas = document.querySelectorAll('#listaTarefas li')
+        tarefas.forEach(tarefa => {
+          tarefa.style.display = 'block'
+        })
+      }
     </script>
   </body>
 </html>
